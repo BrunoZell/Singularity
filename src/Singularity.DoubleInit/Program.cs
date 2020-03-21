@@ -16,7 +16,7 @@ namespace Singularity.DoubleInit
             var container = new Container(builder =>
             {
                 // This registration does result in two initializations of WritingSingleton
-                //builder.Register<ISingleton, WritingSingleton>(c => c.With(Lifetimes.PerContainer));
+                //builder.Register<ISingleton, WritingSingleton>(c => c.As<WritingSingleton>().With(Lifetimes.PerContainer));
 
                 // This registration does result in one initialization of WritingSingleton
                 builder.Register(typeof(WritingSingleton), c => c.As(typeof(ISingleton)).With(Lifetimes.PerContainer));
