@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Singularity.Resolving.Generators;
+using System;
 
 namespace Singularity.DoubleInit
 {
@@ -18,6 +19,15 @@ namespace Singularity.DoubleInit
                 // Both registrations result in two initializations of WritingSingleton
                 builder.Register<ISingleton, WritingSingleton>(c => c.As<WritingSingleton>().With(Lifetimes.PerContainer));
                 //builder.Register(typeof(WritingSingleton), c => c.As(typeof(ISingleton)).With(Lifetimes.PerContainer));
+
+                // This is a workaround
+                builder.ConfigureSettings(settings =>
+                {
+                    settings.ConfigureServiceBindingGenerators(generators =>
+                    {
+                        generators.Remove(x => x is ConcreteServiceBindingGenerator);
+                    });
+                });
             });
 
             var childContainer = container.GetNestedContainer();
