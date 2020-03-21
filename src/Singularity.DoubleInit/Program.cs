@@ -6,10 +6,12 @@
         {
             var container = new Container(builder =>
             {
-                builder.Register<ISingleton, WritingSingleton>();
+                builder.Register<ISingleton, WritingSingleton>(c => c.With(Lifetimes.PerContainer));
             });
 
-            var instance = container.GetInstance<ISingleton>();
+            var instance1 = container.GetInstance<ISingleton>();
+            var instance2 = container.GetInstance<ISingleton>();
+            var instance3 = container.GetInstance<WritingSingleton>();
         }
     }
 }
