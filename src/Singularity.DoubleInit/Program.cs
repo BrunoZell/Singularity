@@ -1,5 +1,14 @@
-﻿namespace Singularity.DoubleInit
+﻿using System;
+
+namespace Singularity.DoubleInit
 {
+    public interface ISingleton { }
+
+    public class WritingSingleton : ISingleton
+    {
+        public WritingSingleton() => Console.WriteLine("Initialized");
+    }
+
     class Program
     {
         static void Main(string[] args)
